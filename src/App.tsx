@@ -22,6 +22,8 @@ import {
   Package,
   LayoutDashboard,
 } from 'lucide-react';
+import logo from '@/assets/logo.svg'; // Logo import
+
 
 interface Product {
   id: string;
@@ -460,7 +462,7 @@ export default function App() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
           <img 
-          src="/src/assets/logo.svg" 
+          src={logo}
           alt="CeluCol Logo" 
           className="h-10 w-10 sm:h-16 sm:w-16 object-contain" 
           style={{ display: 'block' }} 
@@ -549,7 +551,7 @@ export default function App() {
 
             {filteredProducts.length === 0 ? (
               <div className="text-center py-16 text-muted-foreground">
-                <img src="/src/assets/logo.svg" alt="Sin productos" className="size-24 mx-auto mb-16" />
+                <img src={logo} alt="Sin productos" className="size-24 mx-auto mb-16" />
                 <p>No se encontraron productos</p>
               </div>
             ) : (
