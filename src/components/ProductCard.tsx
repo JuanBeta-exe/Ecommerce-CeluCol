@@ -9,6 +9,7 @@ interface Product {
   description: string;
   price: number;
   imageUrl?: string;
+  stock?: number;
 }
 
 interface ProductCardProps {
@@ -40,6 +41,17 @@ export function ProductCard({ product, onAddToCart, onEdit, onDelete, isAdmin }:
         <h3 className="mb-2 line-clamp-1">{product.name}</h3>
         <p className="text-muted-foreground mb-2 line-clamp-2">{product.description}</p>
         <p className="text-primary">${product.price.toFixed(2)}</p>
+        {product.stock !== undefined && (
+          <p className="text-sm mt-1">
+            {product.stock > 0 ? (
+              <span className={product.stock < 10 ? 'text-orange-500' : 'text-muted-foreground'}>
+                Stock: {product.stock} {product.stock < 10 && '(Pocas unidades)'}
+              </span>
+            ) : (
+              <span className="text-red-500">Sin stock</span>
+            )}
+          </p>
+        )}
       </CardContent>
 
       <CardFooter className="p-4 pt-0 gap-2">
@@ -68,9 +80,10 @@ export function ProductCard({ product, onAddToCart, onEdit, onDelete, isAdmin }:
           <Button
             className="w-full"
             onClick={() => onAddToCart?.(product.id)}
+            disabled={product.stock === 0}
           >
             <ShoppingCart className="size-4 mr-2" />
-            Agregar al Carrito
+            {product.stock === 0 ? 'Sin Stock' : 'Agregar al Carrito'}
           </Button>
         )}
       </CardFooter>
